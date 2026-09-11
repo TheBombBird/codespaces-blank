@@ -7,6 +7,9 @@ gcc -no-pie Task_4.s print_ram.c -o task4
 
 ## Run 
 ./task1
+
 ./task2
+
 ./task3
+
 ./task4
