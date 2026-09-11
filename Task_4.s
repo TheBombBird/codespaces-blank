@@ -6,18 +6,18 @@
 .global fill_ram    # Make function visible to C program
 
 fill_ram: 
+
+    movb $0 , %al   # initialize register to 0
+    movb $0 , %bl   # initialize register to 0
+
+    loop:
+    addb $1, %al    # %al is used as incrementer, (up to 10)
+    add %al , %bl   # Adds incremented value each loop to %bl, %bl holds sum
     
-    series_sum:
-    addb $1, ram+0x50;
-    addb $2, ram+0x50;
-    addb $3, ram+0x50;
-    addb $4, ram+0x50;
-    addb $5, ram+0x50;
-    addb $6, ram+0x50;
-    addb $7, ram+0x50;
-    addb $8, ram+0x50;
-    addb $9, ram+0x50;
-    addb $0x0A, ram+0x50;
+    cmpb $10 , %al   # when incrementer is not 10 repeat loop
+    jne loop         # restart loop 
+
+    movb %bl , ram+0x50   # moves sum from %bl into memory location
 
 
     ret             # Return control back to C program
